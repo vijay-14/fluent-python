@@ -1,0 +1,261 @@
+#Chapter1
+- By implementing special methods, your objects can behave like the built-in types, enabling
+the expressive coding style the community considers Pythonic.
+
+- A basic requirement for a Python object is to provide usable string representations of
+itself, one used for debugging and logging, another for presentation to end users. That
+is why the special methods __repr__ and __str__ exist in the Data Model.
+
+#Chapter2
+Overview of built-in sequences
+- Container sequences
+    list, tuple and collections.deque can hold items of different types.
+- Flat sequences
+    str, bytes, bytearray, memoryview and array.array hold items of one type.
+- Syntax tip
+    In Python code, line breaks are ignored inside pairs of [], {} or ().
+    So you can build multi-line lists, listcomps, genexps, dictionaries etc.
+    without using the ugly \ line continuation escape.
+- Deques and other queues
+    The class collections.deque is a thread-safe double-ended queue designed for fast
+    inserting and removing from both ends.
+
+#Chapter3
+Dictionaries and sets
+- collections.Counter
+    a mapping that holds an integer count for each key. Updating an existing key adds
+    to its count. This can be used to count instances of hashable objects (the keys) or
+    as a multiset — a set that can hold several occurrences of each element.
+Immutable mappings
+- types.MappingProxyType
+    Since Python 3.3 the types module provides a wrapper class MappingProxyType which,
+    given a mapping, returns a mappingproxy instance that is a read-only but dynamic view
+    of the original mapping.
+Set theory
+- Examples
+    -A set is a collection of unique objects. A basic use case is removing duplication:
+        >>> l = ['spam', 'spam', 'eggs', 'spam']
+        >>> set(l)
+        {'eggs', 'spam'}
+        >>> list(set(l))
+        ['eggs', 'spam']
+    -Count occurrences needles in a haystack, both of type set
+        found = len(needles & haystack)
+    -Count occurrences needles in a haystack; these lines work for any
+    iterable types.
+        found = len(set(needles) & set(haystack))
+        # another way:
+        found = len(set(needles).intersection(haystack))
+- Practical consequences of how dict works
+    -1: Keys must be hashable objects
+        An object is hashable if all of these requirements are met:
+        1. It supports the hash() function via a __hash__() method that always returns the
+        same value over the lifetime of the object.
+        2. It supports equality via an __eq__() method.
+        3. If a == b is True then hash(a) == hash(b) must also be True.
+        User-defined types are hashable by default because their hash value is their id() and
+        they all compare not equal.
+    -2: dicts have significant memory overhead
+    -3: Key search is very fast
+        The dict implementation is an example of trading space for time:
+        dictionaries have significant memory overhead, but they provide 
+        fast access regardless of the size of the dictionary — as long as it fits in memory.
+    -4: Key ordering depends on insertion order
+    -5: Adding items to a dict may change the order of existing keys
+        If you are iterating over the dictionay keys
+        and changing them at the same time, your loop may not scan all the items as expected
+        — not even the items that were already in the dictionary before you added to it.
+- How sets work — practical consequences
+    “Practical consequences of how dict works” applies to sets as well
+    -1. Set elements must be hashable objects.
+    -2. Sets have a significant memory overhead.
+    -3. Membership testing is very efficient.
+    -4. Element ordering depends on insertion order.
+    -5. Adding elements to a set may change the order of other elements.
+- Further reading for Chapter3
+    - The Mighty Dictionary
+        https://pyvideo.org/pycon-us-2010/the-mighty-dictionary-55.html
+
+#Chapter4
+Text versus bytes
+    "Humans use text. Computers speak bytes."
+    This chapter deals with Unicode strings, binary sequences and the encodings used to
+    convert between them.
+- Character issues
+    The concept of “string” is simple enough: a string is a sequence of characters. The problem
+    lies in the definition of “character”.
+    Converting from code points to bytes is encoding; from bytes to code points is decoding.
+- Handling text files
+    -The best practice for handling text is the “Unicode sandwich”. 
+    -This means that bytes should be decoded to str as early as possible on input, e.g. 
+    when opening afile for reading.
+    -The “meat” of the sandwich is the business logic of your program, where
+    text handling is done exclusively on str objects.
+    -You should never be encoding or decoding in the middle of other processing.
+    -On output, the str are encoded to bytes as late as possible.
+    -In Django, for example, your views should output Unicode str; Django
+    itself takes care of encoding the response to bytes, using UTF-8 by default.
+    -Code that has to run on multiple machines or on multiple occasions
+    should never depend on encoding defaults. Always pass an explicit
+    encoding= argument when opening text files, because the default
+    may change from one machine to the next, or from one day to
+    the next.
+    -Do not open text files in binary mode unless you need to analyze the
+    file contents to determine the encoding — even then, you should be
+    using Chardet instead of reinventing the wheel (see “How to discover
+    the encoding of a byte sequence” on page 108). Ordinary code
+    should only use binary mode to open binary files, like raster images.
+
+#Chapter5
+First-class functions
+    I have never considered Python to be heavily influenced by functional languages, no
+    matter what people say or think. I was much more familiar with imperative languages
+    such as C and Algol 68 and although I had made functions first-class objects, I didn’t view
+    Python as a functional programming language.
+- Functions as First class objects
+    Functions in Python are first-class objects. Programming language theorists define a
+    “first-class object” as a program entity that can be:
+        -created at runtime;
+        -assigned to a variable or element in a data structure;
+        -passed as an argument to a function;
+        -returned as the result of a function.
+- Higher-order functions
+    -A function that takes a function as argument or returns a function as result is a higherorder
+    function.
+    -Having first-class functions enables programming in a functional style. One of the hallmarks
+    of functional programming is the use of higher-order functions.
+- Anonymous functions
+    -To use a higher-order function sometimes it is convenient to create a small, one-off
+    function. That is why anonymous functions exist. We’ll cover them next.
+- Packages for Functional Programming
+    -Although Guido makes it clear that Python does not aim to be a functional programming
+    language, a functional coding style can be used to good extent, thanks to the
+    support of packages like operator and functools, which we cover in the next two
+    sections.
+
+#Chapter6
+Design patterns with first-class functions
+
+#Chapter7
+Function decorators and closures(Learn More)
+    - Function decorators let us “mark” functions in the source code to enhance their behavior  
+    is(in) some way.
+    - We also visited two awesome function decorators provided in the functools module
+    of standard library: @lru_cache() and @singledispatch.
+
+#Chapter8
+Object references, mutability and recycling
+- Variables are not boxes
+    - To understand an assignment in Python, always read the right-hand
+    side first: that’s where the object is created or retrieved. After that, the
+    variable on the left is bound to the object, like a label stuck to it. Just
+    forget about the boxes.
+- Identity, equality and aliases
+    - Every object has an identity, a type and a value. An object’s identity never changes once
+    it has been created; you may think of it as the object’s address in memory. The is operator
+    compares the identity of two objects; the id() function returns an integer representing
+    its identity.
+
+#Chapter9
+A Pythonic object
+
+#Chapter10
+Sequence hacking, hashing and slicing
+
+#Chapter11
+Interfaces:from protocols to ABCs
+
+- An abstract class represents an interface.
+- Strong versus weak typing
+    - If the language rarely performs implicit conversion of types, it’s considered strongly
+    typed; if it often does it, it’s weakly typed. Java, C++ and Python are strongly typed.
+    PHP, JavaScript and Perl are weakly typed.
+- Static versus dynamic typing
+    - If type-checking is performed at compile time, the language is statically typed; it it
+    happens at run-time, it’s dynamically typed. Static typing requires type declarations
+    (some modern languages use type inference to avoid some of that). Fortran and
+    Lisp are the two oldest programming languages still alive and they use, respectively,
+    static and dynamic typing.
+
+#Chapter12
+Inheritance: for good or for worse
+
+#Chapter13
+Operator overloading: doing it right
+
+#Chapter14
+Iterables, iterators and generators
+    - When I see patterns in my programs, I consider it a sign of trouble. The shape of a program
+    should reflect only the problem it needs to solve. Any other regularity in the code is a
+    sign, to me at least, that I’m using abstractions that aren’t powerful enough — often that
+    I’m generating by hand the expansions of some macro that I need to write1.
+    — Paul Graham
+    - Every collection in Python is iterable, and iterators are used internally to support:
+        - for loops;
+        - collection types construction and extension;
+        - looping over text files line by line;
+        - list, dict and set comprehensions;
+        - tuple unpacking;
+        - unpacking actual parameters with * in function calls.
+    - How a generator function works
+    Any Python function that has the yield keyword in its body is a generator function: a
+    function which, when called, returns a generator object. In other words, a generator
+    function is a generator factory.
+    - The Iterator interface is designed to be lazy: next(my_iterator) produces one item
+    at a time. The opposite of lazy is eager: lazy evaluation and eager evaluation are actual
+    technical terms in programming language theory.
+    - Ready to use generator functions in the standard library
+        os.walk - yields file names while
+        traversing a directory tree, making recursive file system searches as simple as a for loop.
+        Filtering generator functions - They yield a subset of items produced
+        by the input iterable, without changing the items themselves.
+        itertools.compress - consumes two iterables in parallel; yields items from it whenever the
+        corresponding item in selector_it is truthy
+        itertools.dropwhile - consumes it skipping items while predicate computes truthy, then yields
+        every remaining item (no further checks are made)
+        filter - builtin applies predicate to each item of iterable, yielding the item if predi
+        cate(item) is truthy; if predicate is None, only truthy items are yielded
+        itertools.filterfalse - same as filter, with the predicate logic negated: yields items whenever
+        predicate computes falsy
+        itertools.islice - yields items from a slice of it, similar to s[:stop] or
+        s[start:stop:step] except it can be any iterable, and the operation is
+        lazy
+        itertools.takewhile - yields items while predicate computes truthy, then stops and no further
+        checks are made
+
+#Chapter15
+Context managers and else blocks
+    - 
+        
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+    
+
+
+    
+
+
+
+
+
+    
+
+
+
+
+
+

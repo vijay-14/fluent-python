@@ -1,0 +1,25 @@
+Libraries:
+perf_counter: performance timer
+Pingo: uniform API to program devices like the Raspberry Pi,pcDuino
+Functional Programming HOWTO: https://docs.python.org/3/howto/functional.html
+Design Patterns: Elements of Reusable Object-Oriented Software. (Addison-Wesley, 1995)
+Alex Martelli DP Talk: https://pyvideo.org/europython-2011/python-design-patterns.html
+Learning Python Design Patterns: by Gennadiy Zlobin (Packt, 2013)
+Decorators blog: http://blog.dscpl.com.au/2014/01/how-you-implemented-your-python.html
+Decorators examples: https://pypi.org/project/decorator/
+Vector space model: https://en.wikipedia.org/wiki/Vector_space_model
+Vector space modeling nlp python lib gemsim: https://pypi.org/project/gensim/
+python module of the week: https://pymotw.com/3/
+Tkinter GUI toolkit
+Classy Class-Based Views: http://ccbv.co.uk/
+cpython code with different versions: https://hg.python.org/cpython/file/3.4/Lib/_collections_abc.py
+Python super() use cases article: https://rhettinger.wordpress.com/2011/05/26/super-considered-super/
+object oriented thinking: Grady Booch’s Object Oriented Analysis and Design
+coroutines: http://www.dabeaz.com/coroutines/
+Case study: generators in a database conversion utility
+https://github.com/fluentpython/isis2json
+itertools module documentation: https://docs.python.org/3/library/itertools.html
+itertools Recipes: https://docs.python.org/3/library/itertools.html#itertools-recipes
+From ISIS to CouchDB: Databases and Data Models for Bibliographic Records: https://journal.code4lib.org/articles/4893
+
+
