@@ -224,8 +224,37 @@ Iterables, iterators and generators
         checks are made
 
 #Chapter15
-Context managers and else blocks
-    - 
+Context managers and else blocks 
+    - for/else
+        The else block will run only if and when the for loop runs to completion; i.e. not
+        if the for is aborted with a break.
+    - while/else
+        The else block will run only if and when the while loop exits because the condition
+        became falsy; i.e. not when the while is aborted with a break.
+    - try/else
+        The else block will only run if no exception is raised in the try block. The official
+        docs also state:
+Context managers and with blocks
+
+#Chapter16
+Coroutines
+    - The behavior and states of a generator operating as a coroutine.
+        - Priming a coroutine automatically with a decorator.
+        - How the caller can control a coroutine through the .close() and .throw(…)
+        methods of the generator object.
+        - How coroutines can return values upon termination.
+        - Usage and semantics of the new yield from syntax.
+        - A use case: coroutines for managing concurrent activities in a simulation.
+    - Use case: coroutines for discrete event simulation
+        - Coroutines are a natural way of expressing many algorithms, such as simulations, games,
+        asynchronous I/O, and other forms of event-driven programming or co-operative multitasking.
+    - The taxi fleet simulation
+
+#Chapter17
+Concurrency with futures
+
+    
+
         
 
 

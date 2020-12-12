@@ -21,5 +21,15 @@ https://github.com/fluentpython/isis2json
 itertools module documentation: https://docs.python.org/3/library/itertools.html
 itertools Recipes: https://docs.python.org/3/library/itertools.html#itertools-recipes
 From ISIS to CouchDB: Databases and Data Models for Bibliographic Records: https://journal.code4lib.org/articles/4893
-
-
+PyCon US 2013 keynote: https://pyvideo.org/pycon-us-2013/keynote-3.html
+David Beazley generators tutorials: http://www.dabeaz.com/generators/ http://www.dabeaz.com/coroutines/ http://www.dabeaz.com/finalgenerator/
+James Powell: https://code.activestate.com/recipes/tags/coroutine/ 
+ActiveState Code Recipies: https://code.activestate.com/recipes/
+Yield From examples: https://www.cosc.canterbury.ac.nz/greg.ewing/python/yield-from/yield_from.html
+Effective Python coroutines: https://effectivepython.com/2015/03/10/consider-coroutines-to-run-many-functions-concurrently
+Conway's Game of Life: https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+Conway's Game of Life PYthon Code: https://gist.github.com/ramalho/da5590bc38c973408839
+Comparing two CSV files using Python by Peter Otten: https://mail.python.org/pipermail/tutor/2015-February/104200.html
+Rock-Paper-Scissors game in Ian Ward’s Iterables, Iterators and Generators: https://nbviewer.jupyter.org/github/wardi/iterables-iterators-generators/blob/master/Iterables,%20Iterators,%20Generators.ipynb
+Guido van Rossum The difference between yield and yield-from: https://groups.google.com/g/python-tulip/c/bmphRrryuFk/m/aB45sEJUomYJ?pli=1
+Ashish Gupta’s Writing a Discrete Event Simulation: ten easy lessons: https://users.cs.northwestern.edu/~agupta/_projects/networking/QueueSimulation/mm1.html
